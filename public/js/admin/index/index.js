@@ -12,7 +12,6 @@ $(function(){
 			}
 		})
 	})
-<<<<<<< HEAD
 
 	$("#img_upload").click(function(){
 	    var files = $('#avatar').prop('files');
@@ -34,6 +33,3 @@ $(function(){
 	});
 })
 
-=======
-})
->>>>>>> parent of 6df43b7... 	modified:   package.json
