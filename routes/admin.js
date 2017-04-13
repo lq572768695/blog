@@ -5,6 +5,8 @@ var fs=require("fs");
 var formidable = require('formidable');
 var server=mongo.Server("localhost",27017,{auto_reconnect:true});
 var db=new mongo.Db("blog",server,{safe:true});
+
+
 /*后台管理*/
 router.get('/admin', function(req, res, next) {
 	var loginAdmin = req.session["loginAdmin"]
@@ -110,7 +112,7 @@ router.post('/imgupload', function(req, res, next) {
 	var form = new formidable.IncomingForm(),files=[],fields=[],docs=[];  
 	console.log('start upload');  
 	//存放目录  
-	form.uploadDir = '/upload';  
+	form.uploadDir = '/upload';
 	form.on('field', function(field, value) {  
 	    //console.log(3,field, value);  
 	    fields.push([field, value]);
@@ -121,8 +123,13 @@ router.post('/imgupload', function(req, res, next) {
 	    docs.push(file);  
 	    var types = file.name.split('.');  
 	    var date = new Date();  
-	    var ms = Date.parse(date);  
-	    fs.renameSync(file.path, "upload/" + ms + '_'+file.name);  
+	    var ms = Date.parse(date); 
+	    var pre_path = "./upload/aaaa/"
+	    var date_dir=pre_path
+	    if(!fs.existsSync(date_dir)){
+        fs.mkdirSync(date_dir)
+    }
+	    fs.renameSync(file.path, date_dir + ms + '_'+file.name);  
 	}).on('end', function() {  
 	    console.log('-> upload done');  
 	    res.writeHead(200, {  

@@ -27,7 +27,7 @@ $(function(){
 		    processData: false,
 		    contentType: false,
 		    success:function(rs){
-		    	
+		    	console.log(rs)
 		    }
 		});
 	});
